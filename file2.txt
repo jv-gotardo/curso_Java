@@ -1,0 +1,6 @@
+Olá, seja bem-vindo.
+Esse é um texto.
+Um texto de arquivo que será usado por stream.
+Um arquivo que será usado por stream.
+O nome é file2.
+Ponto final.

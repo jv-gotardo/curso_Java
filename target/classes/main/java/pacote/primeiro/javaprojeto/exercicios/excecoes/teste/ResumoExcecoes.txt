@@ -1,0 +1,25 @@
+Errors - Um error no Java deve ser consertado no código. Um exemplo é o StackOverFlow:
+se, por exemplo, um método chamar ele mesmo, a pilha de métodos será indefinida. Por isso,
+o programa só terminaria se a memória disponível terminasse.
+
+Tratamento - O try-catch é utilizado para tratamentos. O try realizará uma determinada ação, e
+em uma eventual exceção, ela será pega pelo catch, que a lançará. É recomendado especificar a
+exceção que um programa pode lançar. O throws tem uma função semelhante, sendo adicionado na
+assinatura do método. O try-catch é preferível em um método privado, e o throws em método
+público, principalmente em exceptions não runtime.
+
+Checked Exception - Diretamente filha de Exception. O código não compila se essas exceções não
+forem tratadas. Exemplos incluem a SQLException e a IOException.
+Unchecked Exception - Exceções do tipo RuntimeException. Ocorre por problemas de código, geralmente.
+Exemplos incluem o OutOfBounds e o NullPointer.
+
+Finally - É um comando para fazer com que uma parte do código seja sempre executada, mesmo se
+uma exceção ocorrer.
+Múltiplos Catches - É possível fazer vários catches. Também existe a opção de verificar qual
+exceção ocorreu, pelo uso do |. Também é possível lançar múltiplas exceções dentro do throws.
+
+Try with Resources - Utilizado em situações em que existem nested try-catches. A declaração é feita
+dentro dos () do try, que então realiza ele mesmo as verificações. Muito utilizado em classes e
+interfaces que fazem uso do Closeable, por exemplo.
+
+Criação de Exceções - Isso é possível através de um extends do Exception.
