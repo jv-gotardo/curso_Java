@@ -6,6 +6,7 @@ public class TheCure extends BandaV1{
     private String[] albuns;
 
     //uso do FINAL
+    //uma classe final faria com que ela não pudesse ter subclasses
     private final int ANO_FUND = 1977;
 
     //uso da herança

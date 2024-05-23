@@ -9,6 +9,7 @@ public abstract class Funcionario extends Pessoa{
     //Isso gera um problema: As subclasses de Funcionario agora serão obrigadas a implementar os métodos
     //abstratos de sua classe-avô. Contudo, se esta for implementada dentro da classe-pai, essa necessidade
     //deixa de existir.
+
     protected String nome;
     protected double salario;
 
