@@ -1,0 +1,2 @@
+O objetivo dese miniprojeto é treinar e relembrar o uso de Orientação a Objetos.
+Tema: música

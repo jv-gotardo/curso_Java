@@ -1,0 +1,2 @@
+Criar um miniprojeto de poo, abrangendo além dos temas do primeiro, polimorfismo.
+Tema: cadastro de textos acadêmicos;
