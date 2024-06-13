@@ -1,0 +1,26 @@
+Exceção - Uma exceção é um fluxo não esperado em um código.
+    Error - É um erro que não pode ser consertado, demandando a reinicialização
+    da aplicação.
+    Checked - Diretamente filhas da classe Exception; se não forem tratadas, a
+    compilação nem ao menos ocorre.
+        Exceptions - SQLException (relacionado a SQL), IOException (a arquivos)
+    Unchecked - Ocorrem devido a problemas do código que não foram tratados. Filhas
+    de Runtime Exception.
+        Runtime Exceptions - NulPointer, OutOfBounds...
+
+Try-Catch - O try tentará executar um determinado comando; o catch captura
+a exceção e retorna seu resultado se ela ocorrer.
+Finally - É um comando executado mesmo se uma exceção ocorre.
+Catch (exception | exception | ...) - Usado para evitar múltiplos catches em um código.
+Sobrescrita de Exceções - Exceções podem ser delegadas a sub-classes que implementarem
+a classe pai, e esta deve tratar a exceção.
+Try With Resources - Usado de certa maneira em substituição ao finally, o código que
+deve ser executado é declarado entre () do try. Mais usado em classes que implementam
+a interface Closeable e relacionados.
+
+Throw New - Retorna uma nova exceção, sem diretamente usar o try-catch.
+Throw na Assinatura - São exceções definidas na assinatura de um método, evitando o
+uso do try-catch.
+
+Usos do Try-Catch - Especialmente métodos privados e Runtime.
+Usos do Throw - Métodos públicos e não Runtime.

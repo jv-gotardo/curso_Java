@@ -7,6 +7,7 @@ public class LambdaTeste {
     public static void main(String[] args) {
         List<String> strings = List.of("Jimmy", "John", "Mary", "Anne");
         forEach(strings, st -> System.out.println(st));
+        //forEach(strings, System.out::println);
         List<Double> doubles = List.of(1.6, 3.7, 5.7, 2.5, 8.6);
         forEach(doubles, db -> System.out.println(db > 5));
     }

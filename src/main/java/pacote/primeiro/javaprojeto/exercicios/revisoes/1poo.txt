@@ -1,0 +1,32 @@
+Atributos - Uma característica daquele objeto. Exemplo, em uma classe pessoa,
+o seu nome
+    Tipo - O tipo do atributo. Varia entre int, String, float, double, long.
+    Modificador de Acesso - Quem pode acessar aquele atributo. São usados também em
+    métodos, classes em si.
+        Private - Somente a classe em si pode acessar. Existem getters e setters para
+    classes externas poderem acessar.
+        Protected - Classes que extenderem aquela classe podem acessar seus atributos.
+        Public - Qualquer classe pode acessar. Comum apenas em métodos.
+Métodos - Ações feitas por uma classe.
+    Construtor - Inicializador de atributos.
+    Getters - Retorna o atributo em si.
+    Setters - Permite modificar o conteúdo do atributo.
+New - Cria uma nova instância do objeto.
+Modificadores
+    Final - Define que o atributo, ou classe, é constante.
+    Static - Define que aquele atributo ou método não pode ser modificado por outra classe
+    ou que não pode ser instanciado e modificado.
+Bloco de Inicialização - Define valores iniciais para certos atributos ou objetos da classe.
+    Estático - Define que os valores atribuídos continuam após eventuais mudanças.
+Associação - Indica a chamada de outra classe, podendo ser um atributo ou método, referenciando
+essa chamada com o nome da classe referenciada.
+Enumeração - Indica atributos finais, com possíveis métodos e valores associados, geralmente
+para uso de outras classes.
+Herança - Usando o modificador extends, indica que uma classe recebe atributos ou métodos
+de sua classe-pai. Pode-se indicar uma inicailização no construtor através do super.
+Abstract - Indica que aquela classe ou método tem seu conteúdo definido por uma outra
+classe, sendo uma espécie de template para outra classe; sendo naturalmente classe-pai.
+Interface - Define métodos que devem ter seu comportamento definido por quem o usar,
+através de implements.
+Polimorfismo - Diferentes classes, com a mesma classe-pai, podem ser instanciadas chamando
+sua classe-pai com um new classe-filho, e seus respectivos atributos.

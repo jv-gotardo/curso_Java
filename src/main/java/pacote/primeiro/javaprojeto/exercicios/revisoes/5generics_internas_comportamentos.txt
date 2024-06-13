@@ -1,0 +1,111 @@
+Generics - O Generics foi criado para tipar uma coleção em tempo de compilação.
+List<Consumidor> list0 = new ArrayList<>(); <> é o Generics.
+
+Wildcard - Se, por exemplo, uma classe abstrata contém duas classes filhas, e se
+quiser adicionar um array do tipo da classe-pai com duas classes filhas distintas uma
+da outra, pode-se usar o polimorfismo para isso, contudo, isso só é possível com arrays.
+Nesse exemplo:
+List <ObF1> obf1 = List.of(new ObF1(), new ObF1();
+List <ObF2> obf2 = List.of(new ObF2(), new ObF2();
+Não se pode adicionar uma nova lista do tipo Classe-Pai. O Wildcard é uma solução para
+isso:
+private static void imprime(List<? extends ClassePai> classesfilhas){
+        for (ClassePai classefilha : classesfilhas) {
+            System.out.println(classefilha);
+        }
+    }
+com List<? super ClassePai> classesfilhas, a superclasse de ClassePai também é extendida,
+e as classes filhas são também devido ao polimorfismo.
+
+Classe Genérica: exemplo:
+Essa classe é usada quando duas classes tem muita similaridade em suas funcionalidades,
+e não pode ser feito o polimorfismo por não haver superclasse comum.
+public class ClasseGenerica<T>; as funcionalidades das outras classes são substituídas,
+ao invés da chamada daquela classe, por T. Com isso, quando do teste, se substitui
+esse tipo genérico pela classe em si; exemplos:
+List<ClGe1> clge1 = List.of(new ClGe1(), new ClGe1());
+List<ClGe2> clge2 = List.of(new ClGe2(), new ClGe2());
+ClasseGenerica<ClGe1> cg1 = new ClasseGenerica<>(clge1);
+ClasseGenerica<ClGe2> cg2 = new ClasseGenerica<>(clge2);
+ClGe1 clg1 = cg1.metodo();
+ClGe2 clg2 = cg2.metodo();
+
+Método Genérico: exemplo:
+É o mesmo conceito da classe, só que em um método:
+private static <T> void createArrayWObject(T t){}
+O T será substituído pela classe a ser chamada durante o teste, retornando um array
+do tipo T, como definido na assinatura do método.
+
+-----------//-----------//-----------//-----------//-----------//-----------//-----------//
+
+Classes Internas: São classes dentro de outras classes. Elas não podem serem chamadas
+por serem estáticas. Exemplo:
+public class ClassesInternas {
+    private String nome = "nome";
+    class Interna {
+        public void imprimeNome(){
+            System.out.println(nome);
+        }
+    }
+Devem se criar duas instâncias para essas classes, portanto.
+Interna cit = new ClassesInternasTeste().new Interna();
+cit.imprimeNome();
+
+Classes Locais: São classes dentro de métodos. Métodos também podem ter atributos, que
+deixam de existir quando eles acabam, e são sempre final. Essa classe deve ser inicializada
+diretamente dentro do método para ser útil.
+
+Classes Anônimas: São classes dentro de instâncias. Elas são usadas para demonstrar um
+comportamento breve, e não podem ter nada que não exista dentro de sua classe-pai.
+Classes anônimas ajudam ainda a sortir listas. Exemplo:
+pessoas.sort(new Comparator<Pessoa>() {
+    @Override
+        public int compare(Pessoa o1, Pessoa o2) {
+            return o1.getNome().compareTo(o2.getNome());
+        }
+    });
+Isso pode ser simplificado usando lambda (estrutura do lambda):
+pessoas.sort((o1, o2) -> o1.getNome().compareTo(o2.getNome()));
+[Variável da Classe Instanciada(Objetos Comparados) -> Retorno]
+E mais com Method Reference:
+pessoas.sort(Comparator.comparing(Pessoa::getNome));
+[V. Cl. Inst.(Nova Instância.Método da Instância(Classe a ser Modificada::Atributo))]
+
+-----------//-----------//-----------//-----------//-----------//-----------//-----------//
+Parametrização de Comportamentos - Quando dois métodos apresentam comportamentos
+semelhantes, pode-se substituir os seus parâmetros por um Generic, chamado Predicate.
+O Predicate substitui o seu parâmetro; nesse caso, é utilizado um de seus métodos para
+exercer a funcionalidade.
+private static List<Carro> filtro(List<Carro> list, Predicate<Carro> predicate){
+    List<Carro> filtroCarro = new ArrayList<>();
+        for (Carro carro:list) {
+            if(predicate.test(carro)){
+                filtroCarro.add(carro);
+            }
+        }
+        return filtroCarro;
+    }
+
+Exemplo de uma classe anonima:
+List<Carro> carrosPretos = filtro(list, new Teste() {
+    @Override
+    public boolean testando(Carro carro) {
+        return carro.getCor().equals("preto");
+    }
+});
+System.out.println(carrosPretos);
+Como lambda:
+Com lambda, não é necessário criar uma interface para esse filtro.
+List<Carro> carrosPretos = filtro(list, carro -> carro.getCor().equals("preto"));
+
+Os comportamentos podem ser parametrizados de forma extremamente genérica, ainda assim,
+funcionarão
+private static <T> List<T> filtro(List<T> list, Predicate<T> predicate){
+        List<T> objetosFiltrados = new ArrayList<>();
+        for (T e:list) {
+            if(predicate.test(e)){
+                objetosFiltrados.add(e);
+            }
+        }
+        return objetosFiltrados;
+    }

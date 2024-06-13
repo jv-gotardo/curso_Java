@@ -1,0 +1,43 @@
+Consumer - Uma interface funcional que executa uma operação e retorna void. Accept,
+seu método, performa uma operação a partir de um argumento.
+private static <T> void forEach(List<T> list, Consumer<T> consumer){
+    for(T e: list){
+        consumer.accept(e);
+            //accept vai performar essa operação dado um argumento.
+        }
+    }
+List <String> strings = List.of("A", "B");
+Lambda: forEach(strings, st -> System.out.println(st));
+
+Function - Uma interface funcional que aceita um argumento e produz um resultado.
+No exemplo abaixo, T é o tipo de entrada da função , e R o de resultado. O apply aplica
+a função a cada elemento.
+private static <T, R>List<R> map(List<T> list, Function<T, R> function){
+    List<R> result = new ArrayList<>();
+    for(T e:list){ //Para cada elemento de T na lista.
+        R apply = function.apply(e); //Aplica essa função a cada elemento.
+        result.add(apply);
+    }
+    return result;
+}
+No exemplo abaixo:
+List<String> strings = List.of("Sao Paulo", "Rio de Janeiro", "Porto Alegre");
+    Representa a lista a ser chamada como parâmetro.
+List<String> mapp = map(strings, s -> s.toLowerCase());
+    s -> ... representa o Function
+
+Pode ser traduzido para um método não genérico como:
+//private static <Entrada, Retorno> List <Entrada> (Lista<Entrada>, Função<Retorno>)
+private static <String, String>List<String> map(List<String> list, Function<String, String> function){
+    //Lista<Retorno> result = new ArrayList<>();
+    List<String> result = new ArrayList<>();
+    //Para cada elemento Entrada da Lista<Entrada>
+    for(String e:list){
+        //Aplica a função a cada elemento da Lista<Entrada>
+        String apply = function.apply(e);
+        //Adiciona à Lista<Retorno> os elementos de apply.
+        result.add(apply);
+    }
+    return result;
+}
+

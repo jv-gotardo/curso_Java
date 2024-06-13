@@ -1,0 +1,27 @@
+Equals - Método para determinar se dois objetos são iguais no Java.
+    Condições:
+        Reflexivo - x.equals(x) é true se for diferente de null;
+        Simétrico - x e y != null, se x.equals(y) == true, logo y.equals(x) == true;
+        Transitivo - x, y e z != null, todos .equals() entre estes são true.
+        Consistente - se x != null, x.equals(null) == false.
+
+    Exemplo:
+        if(obj == null) return false; //Se objeto é nulo, false
+        if(this == obj) return true; //Se this == objeto, true
+        if(this.getClass() != obj.getClass()) return false; //This deve ser igual a obj
+        Computador computador = (Computador) obj; //Instância do objeto é igual ao parse
+        do tipo do objeto no objeto.
+
+HashCode - Código associado a um valor no array, para melhor procura. Uma coleção tem
+seus elementos hash relacionados à eles.
+    Cnodições:
+        x.equals(y), então x.hashCode() == y.hashCode() - Elementos iguais tem o mesmo Hash
+        y.hashCode() == x.hashCode(), nem sempre y.equals(x) - Hashs iguais podem ser de elementos diferentes
+        y.hashCode() != x.hashCode(), logo x.equals(y) == false;
+    Implementação:
+        if(atributoint == null);
+        return serial == null ? 1 : this.serial.hashCode();
+
+Exemplo: c1 = new valor(7), c2 = new valor(7) -> diferentes; pois diferentes posições da memória
+c3 = c1 -> iguais.
+

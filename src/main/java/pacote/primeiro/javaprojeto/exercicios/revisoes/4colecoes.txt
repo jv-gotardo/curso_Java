@@ -1,0 +1,108 @@
+Coleções - Grupo de dados. Sorted ou ordered.
+
+Lista - Uma coleção de dados ordenada, fortemente tipada. Exemplo:
+    List<String> list = new ArrayList<>(*) * - pode-se definir a capacidade.
+
+    list.add() = Adiciona um novo elemento à lista.
+    Tipos primitivos usam Wrapper - int-> Integer
+    list.remove() = Remove um objeto; este deve ser equals. Pode-se usar o índice
+    list.clear() = Retira valores sem perder a variável.
+    list.contains() = Verifica se um objeto está na lista.
+    list.indexOf() = Retorna o index do primeiro de objetos iguais; se não, retorna -1.
+    Collections.sort(list) - Organiza os elementos da lista em alfabético se String.
+    Comparator - Precisa ser implementado por uma classe se os objetos não forem
+    somente String. Ex:
+        class byIdComparator implements Comparator<Objeto>{
+            @Override
+            public int compare(Objeto m1, Objeto m2) {
+                return m1.getId().compareTo(m2.getId());
+            }
+        }
+        Após a implementação, que deve ser externa à classe, pode ser chamado o Sort.
+
+Binary Search - Implementado através do Collections em coleções que fizeram o Sort,
+Retorna o índice de um valor na coleção. Coleções além de String devem implementar
+o Comparator também.
+
+Iterator - Utilizado para remoção de objetos em coleções. Utilizado através do
+.hasNext(), .next() e então .remove(). Não muito utilizado pois pode-se fazer isso
+através da programação funcional.
+
+LinkedList - Enquanto ArrayList<> é mais comum, LinkedList<> é usado se forem necessárias
+remoções frequentes, devido à melhor performance.
+
+Conversões entre Array e Lista
+    Integer[] array = list.toArray(new Integer[0]);
+    0 é passado pois através dele o Java sabe o tamanho do array que precisará criar.
+    Ele também tem um desempenho melhor que outras opções.
+
+    Integer[] numeros = {0, 1, 2, 3};
+    List<Integer> integerList = Arrays.asList(numeros);
+
+    Facilita na criação de listas de Integer.
+    List<Integer> integerList1 = Arrays.asList(2, 4, 7, 9);
+
+Set - Interface que não permite elementos repetidos. Não é indexado, portanto só pode
+se acessar seus valores através do forEach. Exemplo:
+    Set<String> palavras = new HashSet(); //hashSet também adiciona um hashCode.
+    O equals verifica se existem elementos repetidos. É importante que o equals e o
+    hashCode estejam implementados nas classes que utilizam coleções dessas classes.
+
+NavigableSet - Um sortedSet que utiliza métodos de navegação para pesquisa, reportando
+matches próximos. Utiliza o TreeSet para criação dos sets.
+    NavigableSet<Computador> nsc = new TreeSet<>(new computadorMarca());
+O TreeSet deve ter seu Comparator implementado para não retornar exceções. Deve retornar
+o atributo a ser comparado.
+    Métodos:
+        DescendingSet - Inverte a ordem de impressão.
+    Métodos em relação a instância que está sendo chamado, de acordo com o atributo
+    definido pelo Comparator:
+        Lower < O menor depois dele.
+        Floor <= O mesmo elemento, ou o que vem antes dele.
+        Higher > O maior depois dele.
+        Ceiling >= O mesmo, ou o que vem depois.
+
+Map - O map recebe dois valores, chave e valor. Pode-se exibir os valores presentes no
+Map através do HashMap (ordem de Hash) e LinkedMap(ordem convencional).
+    .put - Adiciona uma chave e valor a um map.
+    .keySet() - Imprime as chaves.
+    .values() - Imprime os valores.
+    Ambos:
+        for (Map.Entry<String, String> entry : map.entrySet()){
+           System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    Exemplo de criação - somente 1 chave e 1 valor:
+        Map<ObjetoChave, ObjetoValor> map = new HashMap<>();
+
+    1 chave e múltiplos valores:
+         ObjetoChave oc = new ObjetoChave("obc");
+         List<Objeto1> objeto1 = List.of(m1, m3, m5);
+         Map<ObjetoChave, List<Objeto1>> map = new HashMap<>();
+         map.put(oc, objeto1);
+
+         Impressão:
+         for (Map.Entry<ObjetoChave, List<Objeto1>> entry : map.entrySet()) {
+            System.out.println(entry.getKey().getNome()); //Imprimindo objeto Chave
+            for (Objeto1 ob1: entry.getValue()) {
+                System.out.println(ob1.getNome()); //Imprimindo objeto1
+                }
+            }
+
+NavigableMap - Um map que utiliza métodos de navegação. Utiliza o TreeMap. Não precisa
+utilizar o Comparator. Seus métodos utilizam Key como terminação: lowerKey, floorKey.
+
+Queue - Fila, implementa o FIFO (First In, First Out). Necessita do Comparable.
+    Queue<String> fila = new PriorityQueue<>();
+    O PriorityQueue é utilizado quando algum objeto precisa de prioridade sobre outro.
+Também necessita do Comparator para isso. Métodos do Queue:
+    .peek - Mostra o primeiro elemento.
+    .poll - Pega o primeiro elemento e remove.
+    .offer - Retorna um boolean se a capacidade da queue for ultrapassada.
+.reversed() - Pode ser útil quando chamar o Comparator, revertendo a ordem, se for
+necessário.
+
+
+
+
+
+
