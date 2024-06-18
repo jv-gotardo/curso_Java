@@ -5,6 +5,7 @@ import pacote.primeiro.javaprojeto.javanced.Hstreams.dominio.Filme;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class StreamTeste6 {
     static List<Filme> filmes = new ArrayList<>(List.of(new Filme("Persona", 80),

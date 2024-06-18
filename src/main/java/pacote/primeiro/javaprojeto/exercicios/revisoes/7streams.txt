@@ -1,0 +1,91 @@
+
+coleções: Elementos no espaço.
+
+As Streams são elementos no tempo. Contém ações intermediárias, que retornam a própria
+stream, e ações de término, que retornam uma coleção. Ou seja, uma stream deve retornar
+um elemento no espaço. Uma stream não pode ser reutilizada.
+
+Ações .stream()
+Intermediárias
+
+.sorted() - Retorna uma stream com elementos definidos pelo Comparator.
+.filter() - Retorna uma stream a partir de um Predicate.
+.limit() - Limita os elementos da stream.
+.map() - Retorna uma stream com a aplicação da função <> dada à Stream (classe ou wrapper).
+.distinct() - Retorna um único elemento de uma vez.
+.flatMap() - Retorna uma stream dos resultados de substituir cada elemento com os
+conteúdos de uma stream mapeada, produzida ao aplicar a função de mapear provida a cada
+elemento.
+
+Finais
+
+.collect() - Retorna uma coleção de acordo com as streams através do Collectors.
+    .maxBy() - Retorna um Collector que produz o elemento máximo de acordo com o Comparator.
+.count() - Retorna a contagem de elementos de uma coleção.
+.forEach() - Tem o mesmo resultado do for (Tipo t:ts){};
+.reduce() - Performa uma redução nos elementos da stream, usando uma função associativa
+acumulativa, e retorna um Optional descrevendo o valor reduzido, se houver. Exemplos de
+função associativa incluem adicão, min e max do Integer, e concatenação de String.
+
+.Finais de Curto Circuito - Operações que interrompem o processamento da stream assim
+que determinadas condições são satisfeitas, sem precisar processar todos os elementos
+da stream.
+
+.anymatch () - Retorna um boolean a partir do Predicate, se qualquer elemento tiver aquela caract.
+.allmatch () - Também retorna, se todos os elementos tiveram.
+.findAny () - Retorna qualquer elemento de um Optional de acordo com as condições.
+.findFirst () - Retorna o primeiro elemento do Optional de acordo com as condições.
+
+Troca de Classes, exemplo:
+Integer reduced = filmes.stream()
+    .map(Filme::getDuracao)//O map é útil para fazer a stream trocar sua classe.
+    .filter(f -> f > 90)
+    .reduce(0, Integer::sum);
+System.out.println(reduced);
+
+Soma de Valores de um Array, exemplo:
+double[] array = {2.5,4.6,3.6,1.8,5.1515};
+double suma = Arrays.stream(array).sum();
+System.out.println(suma);
+
+Especializações:
+IntStream - Uma especialização stream para o primitivo int.
+    .rangeClosed - Inclui valores inclusivos entre início e fim.
+.of("", "", ..., "") - Cria uma stream com string.
+
+Outros Métodos:
+.iterate() - Retorna uma stream infinita ordenada sequencial, produzida por uma
+aplicação iterada de uma função f para um elemento inicial s, produzindo uma stream
+consistindo de s, f(s), f(f(s)), etc. Exemplo com Fibonacci:
+Stream.iterate(new int[]{0, 1}, n -> new int[]{n[1], n[0] + n[1]})
+    .limit(15)
+    .map(a -> a[0])
+    .forEach(System.out::println);
+
+.generate() - Retorna uma sequência infinita não ordenada, onde cada elemento é gerado
+pelo Supplier provido. Exemplo de um Supplier é o ThreadLocalRandom.
+
+Vantagens do Collector
+O Collector indica todos os elementos do objeto. Método e comparação:
+sum () => summingLong, summingDouble...
+.summarizing(Long, Int, Double...)() - Retorna as estatísticas de uma coleção numérica.
+.joining() - Retorna a mesma coisa só que com String.
+
+Outros métodos do Collector
+.groupingBy() - Retorna um Collector implementando o group by em elementos de entrada
+do tipo T, agrupando elementos de acordo com uma função de classificação, e retornando
+os resultado em um map. Exemplo:
+Map<Genero, List<Filme>> collect = filmes.
+    stream().
+        collect(Collectors.
+            groupingBy(Filme::getGenero));
+Exemplo com nested map:
+Map<Genero, Map<Trailer, List<Filme>>> newCollect = filmes.stream()
+    .collect(
+    Collectors.groupingBy(
+        Filme::getGenero, Collectors.groupingBy(
+            f -> f.getDuracao() > 90 ? COM_TRAILER : SEM_TRAILER)));
+System.out.println(newCollect);
+
+.mapping() - Adapta um Collector aceitando elementos de U para um aceitando elementos de
+T, ao aplicar uma função mapping para cada elemento de entrada antes da acumulação.

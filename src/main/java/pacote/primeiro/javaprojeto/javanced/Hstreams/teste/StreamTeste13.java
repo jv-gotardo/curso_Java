@@ -29,7 +29,7 @@ public class StreamTeste13 {
         ));
         System.out.println(collect);
 
-        //Com trailer e sem, gênero:
+        //Com trailer e sem gênero:
         Map<Genero, Map<Trailer, List<Filme>>> newCollect = filmes.stream()
                 .collect(Collectors.groupingBy(Filme::getGenero,
                 Collectors.groupingBy(

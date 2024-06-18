@@ -1,0 +1,87 @@
+Padrões de Projeto - Servem para resolver problemas comuns na criação e
+instanciação de classes.
+
+Builder - Constrói a classe em si; instâncias agora são feitas pela classe builder,
+e não pelo construtor, que passa a ser privado. O builder é uma classe dentro da outra.
+Ele em si funciona da seguinte forma:
+Criam-se atributos iguais aos da classe, e um método para cada atributo da classe inicial,
+com o parâmetro os atributos do builder (this.atributo = parametro), e return this.
+Há também o construtor, chamado builder, que retorna a própria classe; e o build(), que
+retorna a classe inicial, com os atributos criados na classe builder como supply do
+construtor da classe inicial. Exemplo de instância com o build:
+
+Pessoa build = new Pessoa.PessoaBuilder()
+        .nome("").sobrenome("")
+        .usuario("").email("").build();
+
+Factory - Utilizado para desacoplar a lógica da criação de builders. Retorna um método
+com um switch entre as opções de objeto disponíveis, além de um default com uma
+exceção.
+
+Um problema comum que é resolvido com um padrão de projetos: dois objetos são inicializados
+com o mesmo valor com isso sendo proibido; porém, embora um devesse retornar false para
+criação daquele objeto, ambos retornam true.
+
+Singleton (Eager) - O Eager é um atributo público estático e final, que retorna uma
+nova instância da própria classe; além de um método que retorna esse mesmo atributo.
+Para que isso funcione, a classe deve ser final, ou seja, não é possível instanciá-la.
+Com isso, a única forma de obter aquele objeto, acaba sendo uma referência ao método
+do Eager; como ele retorna sempre o mesmo objeto, criar um valor já existente retorna
+false.
+
+Singleton (Lazy) - O Lazy não contém o modificador final nos atributos. Porém, uma
+verificação deve ser feita para evitar o problema dos valores repetidos:
+public static SingletonLazy INSTANCIA() {
+    if(INSTANCIA == null){
+        synchronized (SingletonLazy.class){
+            if(INSTANCIA == null) {
+                INSTANCIA = new SingletonLazy(parametro definido);
+            }
+        }
+    }
+    return INSTANCIA;
+}
+
+Singleton (Enum) - A vantagem da criação por enumerações é sua simplicidade, ser
+thread-safe, além de não ser possível usar reflection para alterações.
+
+DataTransferObject (DTO) - Um padrão arquitetural de aplicações corporativas.
+Cria-se uma classe com os atributos desejados, o que pode incluir várias entidades
+diferentes; ao invés de criar vários objetos diferentes para serem passados a uma API,
+(nova instância - novo objeto), o DTO faz com que haja um único.
+O seu Build é ligeiramente diferente do Builder:
+public RelatorioDto build() {
+    RelatorioDto relatorioDto = new RelatorioDto();
+    relatorioDto.atributo1 = this.atributo1;
+    ...
+    relatorioDto.atributoN = this.atributoN;
+    return relatorioDto;
+}
+
+jUnit -  Se um código for mudado, por exemplo, na condição dele, ou mesmo seus
+argumentos, nada garante que outros projetos que o usem não serão afetados. Por isso,
+se utiliza o jUnit para realizar testes.
+
+Quando se fala em testes, se espera que possa-se realizar o maior número de testes.
+Contudo, a melhor prática é fazer com que eles sejam unitários, ou seja: cada teste
+verifica uma única funcionalidade. O jUnit funciona a partir de anotações e da classe
+
+Assertions:
+
+@BeforeEach - Cria um objeto antes da execução de cada teste.
+
+@DisplayName() - Pode-se adicionar um texto de indicação da função daquele teste.
+
+@Test - Indica que o método executado será um teste; retorna sempre um void e não
+possui modificador de acesso.
+
+Classe Assertions - São opções do que aquele código pode prover.
+    .assertFalse e .assertTrue - Realizam operações booleanas básicas.
+    .assertThrows - Realiza o throw de uma exceção. Pode-se fazer com lambda, indicando
+    o .class da exceção () -> operação.
+    .assertEquals - Recebe um valor esperado e um objeto de comparação.
+
+O jUnit utiliza a pasta test, fora do src, para realizar essas operações.
+
+Outras ferramentas utilizadas:
+Record e Pattern Matching.

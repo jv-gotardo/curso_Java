@@ -25,6 +25,5 @@ public class StreamTeste7 {
         integers.stream().reduce(Integer::max).ifPresent(System.out::println);
         //integers.stream().reduce((x, y) -> x > y ? x : y) (Com ternário);
 
-
     }
 }

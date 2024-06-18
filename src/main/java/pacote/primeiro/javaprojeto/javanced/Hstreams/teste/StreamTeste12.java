@@ -33,7 +33,11 @@ public class StreamTeste12 {
         System.out.println(mapGeneros);
 
         //Com Stream
-        Map<Genero, List<Filme>> collect = filmes.stream().collect(Collectors.groupingBy(Filme::getGenero));
+        Map<Genero, List<Filme>> collect = filmes.
+                stream().
+                collect(Collectors.
+                        groupingBy(
+                                Filme::getGenero));
         //o grouping by facilita muito o agrupamento de listas, otimizando o código.
         System.out.println(collect);
     }

@@ -41,3 +41,65 @@ private static <String, String>List<String> map(List<String> list, Function<Stri
     return result;
 }
 
+Exemplo de comparação entre integers Wrapper
+public static int comparePaginas(Livro l1, Livro l2){
+    return Integer.compare(l1.getPaginas(), l2.getPaginas());
+    }
+List<Livros> livros = ...
+
+//Sort com lambda:
+Collections.sort(livros, ((o1, o2) -> o1.getNome().compareTo(o2.getNome())));
+
+Method Reference pega o método que contém o lambda acima, indica a variável
+em que será feita o sort, passando a Classe::Método indicado.
+Collections.sort(livros, LivroComparators::comparePorNome);
+
+também podem ser criadas variáveis para comparar, ex:
+LivroComparators lc = new LivroComparators();
+Collections.sort(livros, lc::comparePorNome);
+//Sem precisar indicar a classe diretamente.
+
+Uso do Method Reference em uma Function:
+       // <Tipo de Entrada, Tipo de Saída> ... = Classe Inteiro::Método parseInt
+        Function<String, Integer> function = Integer::parseInt;
+       // Retorna um inteiro.
+        System.out.println(function.apply("25"));
+
+Predicate - Representa uma função booleana (Predicate) de um argumento. E utiliza <T>
+como o tipo de entrada do predicado. Ex: 5generics_...txt, linha 103
+BiPredicate - Representa uma função booleana de dois argumentos. Além do <T>, utiliza
+<U> como parâmetro para verificação. Ex:
+               <Argumento, P. Verif.> ... = Classe List::Método contains
+    BiPredicate<List<String>, String> biPredicate = List::contains;
+    //test é um método de biPredicate, retorna true se "Michelangelo" está na lista.
+    System.out.println(biPredicate.test(nomes, "Michelangelo"));
+
+Supplier - Representa um supridor de resultados. Usado para criação de objetos.
+Lambda: Supplier<Livro> comparatorsSupplier = () -> new Livro();
+Method Reference: Supplier<Livro> comparatorsSupplier = Livro::new;
+Em um objeto de construtor com parametros, isso não seria possível.
+
+BiFunction - Uma interface funcional que aceita três generics.
+Pode criar uma instância de objeto com parâmetros.
+Lambda: BiFunction<String, Integer, Livro> livroBiFunction = (nome,
+    paginas) -> new Livro(nome, paginas);
+    String = nome, Integer = paginas; Resultado: Objeto do tipo livro.
+Method Reference: BiFunction<String, Integer, Livro> livroBiFunction = Livro:: new;
+//Poderia se indicar os atributos dessa classe através do apply.
+
+Objetos Funcionais Citados: Consumer<T>, Function<T, R>, Predicate<T>,
+BiPredicate<T, U>, Supplier <T>, BiFunction <T, U, R>
+
+---//---//---//------//------//------//------//------//------//------//------//---
+
+Optional - Seu intuito é evitar a ocorrência de NulPointerExceptions. Exemplo:
+Optional<String> o = Optional.of("ABCDEFGHIJKLMN");
+Métodos:
+ofNullable() - permite que um objeto passado no Optional seja nulo. Retorna empty.
+orElse() - Estrutura de condição, retorna um parâmetro especificado se não encontrar.
+ifPresent() - Usado para identificar um caracter em um Optional. Só pode ser usado
+com um Consumer; como retorna void, deve-se usar lambda para executar isso.
+nome.ifPresent(s -> System.out.println(s.charAt(2)));
+orElseThrow() - Se o valor existe, retorna o valor, senão retorna uma exceção que será
+definida pelo Supplier exigido pelo orElseThrow().
+orElseGet() - Se o valor existe, retorna, senão retorna um resultado pelo Supplier.
